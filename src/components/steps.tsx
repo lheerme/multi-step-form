@@ -6,7 +6,7 @@ export function Steps() {
   const setCurrentStep = useDataStore((state) => state.setCurrentStep)
 
   return (
-    <div className="w-full max-w-[274px] bg-[url('./assets/bg-sidebar-desktop.svg')] rounded-lg py-9 px-7 flex flex-col items-center gap-8 shadow-md">
+    <div className="w-full max-w-[274px] bg-[url('./assets/bg-sidebar-desktop.svg')] bg-cover bg-no-repeat rounded-lg py-9 px-7 flex flex-col items-center gap-8 shadow-md">
       <StepButton.Root setCurrentStep={() => setCurrentStep(1)}>
         <StepButton.Step isCurrentStep={currentStep === 1}>
           1

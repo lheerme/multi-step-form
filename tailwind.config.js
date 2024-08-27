@@ -21,6 +21,15 @@ export default {
         alabaster: 'hsl(231, 100%, 99%)',
         white: 'hsl(0, 0%, 100%)',
       },
+      keyframes: {
+        'fade-in': {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 100 }
+        }
+      },
+      animation: {
+        'fade-in': 'fade-in 0.3s ease 0s 1 normal forwards'
+      }
     },
   },
   plugins: [],
