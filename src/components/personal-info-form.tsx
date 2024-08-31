@@ -19,7 +19,7 @@ const personalInfoSchema = z.object({
       const digits = value.replace(/\D/g, '');
       return digits.length >= 10;
     }, {
-      message: "Phone number must have at least 10 digits"
+      message: "Invalid phone number"
     })
 })
 
