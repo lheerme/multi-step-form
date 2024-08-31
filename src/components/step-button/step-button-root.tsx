@@ -8,7 +8,7 @@ interface StepButtonRootProps extends ComponentProps<'button'> {
 }
 
 export function StepButtonRoot(props: StepButtonRootProps) {
-  const { step, ...rest } = props
+  const { step, className, ...rest } = props
 
   const { currentStep, setCurrentStep, isFormComplete } = useDataStore(
     useShallow((state) => ({
@@ -26,11 +26,12 @@ export function StepButtonRoot(props: StepButtonRootProps) {
 
   return (
     <button 
-      onClick={handleClick} 
       {...rest} 
+      onClick={handleClick} 
       className={twMerge('flex items-center gap-4 w-full group', 
         step > currentStep && 'cursor-not-allowed',
-        isFormComplete && 'cursor-not-allowed'
+        isFormComplete && 'cursor-not-allowed',
+        className && className
       )} 
     />
   )
