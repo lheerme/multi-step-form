@@ -5,37 +5,49 @@ import { z } from "zod"
 import { useDataStore } from "../store/use-data-store"
 import { FormHeader } from "./form-header"
 import { Button } from "./button"
+import { useShallow } from "zustand/react/shallow"
 
 const personalInfoSchema = z.object({
   name: z.string().min(1, 'This field is required'),
   email: z.string()
     .min(1, 'This field is required')
-    .email(),
+    .email('Invalid email address'),
   phone: z.string()
     .min(1, 'This field is required')
-    .regex(/^(?:\+1)?\s?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/i, "Invalid phone number"),
+    .regex(/^\+?\d{1,4}[\s.-]?\(?\d{1,4}\)?[\s.-]?\d{1,4}[\s.-]?\d{1,4}[\s.-]?\d{1,9}$/i, "Invalid phone number")
+    .refine(value => {
+      const digits = value.replace(/\D/g, '');
+      return digits.length >= 10;
+    }, {
+      message: "Phone number must have at least 10 digits"
+    })
 })
 
 type PersonalInfoSchema = z.infer<typeof personalInfoSchema>
 
 export function PersonalInfoForm() {
-  const setCurrentStep = useDataStore((state) => state.setCurrentStep)
-  const personalInfo = useDataStore((state) => state.personalInfo)
-  const setPersonalInfo = useDataStore((state) => state.setPersonalInfo)
+  const { setCurrentStep, personalInfo, setPersonalInfo } = useDataStore(
+    useShallow((state) => ({
+      currentStep: state.currentStep,
+      setCurrentStep: state.setCurrentStep,
+      personalInfo: state.personalInfo,
+      setPersonalInfo: state.setPersonalInfo
+    })),
+  )
+
   const { register, handleSubmit, formState: { errors } } = useForm<PersonalInfoSchema>({
     resolver: zodResolver(personalInfoSchema),
     defaultValues: personalInfo || undefined
   })
 
   function handlePersonalInfoSubmit(data: PersonalInfoSchema) {
-    // const { email, name, phone } = data
-    console.log(data)
-    // setCurrentStep(2)
-    // setPersonalInfo({
-    //   email,
-    //   name,
-    //   phone
-    // })
+    const { email, name, phone } = data
+    setCurrentStep(2)
+    setPersonalInfo({
+      email,
+      name,
+      phone
+    })
   }
 
   return (
@@ -94,11 +106,22 @@ export function PersonalInfoForm() {
         <input 
           type="tel"
           placeholder="e.g. +1 234 567 890"
+          inputMode="numeric"
+          pattern="[0-9+\-\(\)\s]*"
           className={twMerge(
             'outline-none ring-1 ring-light-gray rounded-lg text-marine-blue px-4 py-3 text-lg font-medium focus:ring-purplish-blue transition-shadow shadow-sm',
             errors.phone && 'ring-strawberry-red focus:ring-strawberry-red'
           )}
           {...register('phone')}
+          onKeyDown={(e) => {
+            const validKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Delete', 'Tab', 'Enter']
+            const isNumber = /[0-9]/.test(e.key)
+            const isSpecialChar = ['+', '-', '(', ')', ' '].includes(e.key)
+            
+            if (!isNumber && !isSpecialChar && !validKeys.includes(e.key)) {
+              e.preventDefault()
+            }
+          }}
         />
       </div>
 

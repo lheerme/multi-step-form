@@ -27,6 +27,8 @@ interface Store {
   setPlan: (arg0: Plan) => void
   addOns: AddOns
   setAddOns: (arg0: AddOns) => void
+  isFormComplete: boolean
+  setIsFormComplete: (arg0: boolean) => void
 }
 
 export const useDataStore = create<Store>((set) => ({
@@ -38,4 +40,6 @@ export const useDataStore = create<Store>((set) => ({
   setPlan: (arg0: Plan) => set({ plan: arg0 }),
   addOns: { onlineService: false, largerStorage:false, customizableProfile: false },
   setAddOns: (arg0: AddOns) => set({ addOns: arg0 }),
+  isFormComplete: false,
+  setIsFormComplete: (arg0: boolean) => set({ isFormComplete: arg0 })
 }))

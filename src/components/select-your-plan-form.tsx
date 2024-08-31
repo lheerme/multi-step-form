@@ -11,6 +11,8 @@ import { Controller, useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useEffect } from "react"
+import { planPrices } from "../lib/plan-prices"
+import { useShallow } from "zustand/react/shallow"
 
 const planSchema = z.object({
   type: z.enum(['arcade', 'advanced', 'pro']),
@@ -20,17 +22,15 @@ const planSchema = z.object({
 
 type PlanSchema = z.infer<typeof planSchema>
 
-const planPrices: {[key: string]: number} = {
-  arcade: 9,
-  advanced: 12,
-  pro: 15
-}
-
 export function SelectYourPlanForm() {
-  const currentStep = useDataStore((state) => state.currentStep)
-  const setCurrentStep = useDataStore((state) => state.setCurrentStep)
-  const plan = useDataStore((state) => state.plan)
-  const setPlan = useDataStore((state) => state.setPlan)
+  const { currentStep, setCurrentStep, plan, setPlan } = useDataStore(
+    useShallow((state) => ({
+      currentStep: state.currentStep,
+      setCurrentStep: state.setCurrentStep,
+      plan: state.plan,
+      setPlan: state.setPlan,
+    })),
+  )
 
   const { control, handleSubmit, setValue, watch } = useForm<PlanSchema>({
     resolver: zodResolver(planSchema),
@@ -62,7 +62,7 @@ export function SelectYourPlanForm() {
 
   function handleFormSubmit(data: PlanSchema) {
     const { type, isYearly, price } = data
-    console.log(data)
+    setCurrentStep(3)
 
     setPlan({
       type,

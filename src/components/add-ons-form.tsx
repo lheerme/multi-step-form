@@ -6,6 +6,7 @@ import { z } from "zod"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useDataStore } from "../store/use-data-store"
+import { useShallow } from "zustand/react/shallow"
 
 const addOnsSchema = z.object({
   onlineService: z.boolean(),
@@ -16,10 +17,15 @@ const addOnsSchema = z.object({
 type AddOnsSchema = z.infer<typeof addOnsSchema>
 
 export function AddOnsForm() {
-  const addOns = useDataStore((state) => state.addOns)
-  const currentStep = useDataStore((state) => state.currentStep)
-  const setCurrentStep = useDataStore((state) => state.setCurrentStep)
-  const { isYearly } = useDataStore((state) => state.plan)
+  const { addOns, setAddOns, currentStep, setCurrentStep, plan: { isYearly } } = useDataStore(
+    useShallow((state) => ({
+      addOns: state.addOns,
+      setAddOns: state.setAddOns,
+      currentStep: state.currentStep,
+      setCurrentStep: state.setCurrentStep,
+      plan: state.plan,
+    })),
+  )
 
   const { control, handleSubmit } = useForm<AddOnsSchema>({
     resolver: zodResolver(addOnsSchema),
@@ -27,7 +33,15 @@ export function AddOnsForm() {
   })
 
   function handleFormSubmit(data: AddOnsSchema) {
-    console.log(data)
+    const { onlineService, largerStorage, customizableProfile } = data
+
+    setAddOns({
+      onlineService,
+      largerStorage,
+      customizableProfile
+    })
+
+    setCurrentStep(4)
   }
 
   function handleGoBackClick() {
@@ -50,7 +64,7 @@ export function AddOnsForm() {
 
       <label 
         htmlFor="online-service"
-        className="flex items-center gap-5 rounded-md ring-1 ring-cool-gray px-5 py-4 cursor-pointer has-[:checked]:ring-purplish-blue has-[:checked]:bg-pastel-blue/10 hover:ring-purplish-blue transition-all"
+        className="flex items-center gap-5 rounded-md ring-1 ring-light-gray px-5 py-4 cursor-pointer has-[:checked]:ring-purplish-blue has-[:checked]:bg-pastel-blue/10 hover:ring-purplish-blue transition-all"
       >
         <Controller
           control={control}
@@ -58,7 +72,7 @@ export function AddOnsForm() {
           render={({ field }) => {
             return (
               <Checkbox.Root 
-                className="size-4 rounded-sm bg-transparent ring-1 ring-cool-gray flex items-center justify-center data-[state=checked]:bg-purplish-blue data-[state=checked]:ring-purplish-blue transition-colors"  
+                className="size-4 rounded-sm bg-transparent ring-1 ring-light-gray flex items-center justify-center data-[state=checked]:bg-purplish-blue data-[state=checked]:ring-purplish-blue transition-colors"  
                 id="online-service"
                 checked={field.value}
                 onCheckedChange={field.onChange}
@@ -81,7 +95,7 @@ export function AddOnsForm() {
 
       <label 
         htmlFor="larger-storage"
-        className="flex items-center gap-5 rounded-md ring-1 ring-cool-gray px-5 py-4 cursor-pointer has-[:checked]:ring-purplish-blue has-[:checked]:bg-pastel-blue/10 hover:ring-purplish-blue transition-all"
+        className="flex items-center gap-5 rounded-md ring-1 ring-light-gray px-5 py-4 cursor-pointer has-[:checked]:ring-purplish-blue has-[:checked]:bg-pastel-blue/10 hover:ring-purplish-blue transition-all"
       >
         <Controller
           control={control}
@@ -89,7 +103,7 @@ export function AddOnsForm() {
           render={({ field }) => {
             return (
               <Checkbox.Root 
-              className="size-4 rounded-sm bg-transparent ring-1 ring-cool-gray flex items-center justify-center data-[state=checked]:bg-purplish-blue data-[state=checked]:ring-purplish-blue transition-colors"  
+              className="size-4 rounded-sm bg-transparent ring-1 ring-light-gray flex items-center justify-center data-[state=checked]:bg-purplish-blue data-[state=checked]:ring-purplish-blue transition-colors"  
               id="larger-storage"
               checked={field.value}
               onCheckedChange={field.onChange}
@@ -112,7 +126,7 @@ export function AddOnsForm() {
 
       <label 
         htmlFor="customizable-profile"
-        className="flex items-center gap-5 rounded-md ring-1 ring-cool-gray px-5 py-4 cursor-pointer has-[:checked]:ring-purplish-blue has-[:checked]:bg-pastel-blue/10 hover:ring-purplish-blue transition-all"
+        className="flex items-center gap-5 rounded-md ring-1 ring-light-gray px-5 py-4 cursor-pointer has-[:checked]:ring-purplish-blue has-[:checked]:bg-pastel-blue/10 hover:ring-purplish-blue transition-all"
       >
         <Controller
           control={control}
@@ -120,7 +134,7 @@ export function AddOnsForm() {
           render={({ field }) => {
             return (
             <Checkbox.Root 
-              className="size-4 rounded-sm bg-transparent ring-1 ring-cool-gray flex items-center justify-center data-[state=checked]:bg-purplish-blue data-[state=checked]:ring-purplish-blue transition-colors"  
+              className="size-4 rounded-sm bg-transparent ring-1 ring-light-gray flex items-center justify-center data-[state=checked]:bg-purplish-blue data-[state=checked]:ring-purplish-blue transition-colors"  
               id="customizable-profile"
               checked={field.value}
               onCheckedChange={field.onChange}

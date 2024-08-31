@@ -7,7 +7,8 @@ const buttonVariants = tv({
   variants: {
     variant: {
       primary: 'bg-marine-blue text-white hover:opacity-90 hover:transition-opacity rounded-lg shadow-sm',
-      secondary: 'text-cool-gray hover:text-marine-blue hover:transition-colors'
+      secondary: 'text-cool-gray hover:text-marine-blue hover:transition-colors',
+      tertiary: 'bg-purplish-blue text-white hover:opacity-90 hover:transition-opacity rounded-lg shadow-sm'
     },
   },
   defaultVariants: {
