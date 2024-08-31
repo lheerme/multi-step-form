@@ -2,7 +2,7 @@ import { useShallow } from "zustand/react/shallow";
 import { useDataStore } from "../store/use-data-store";
 import { FormHeader } from "./form-header";
 import { addOnsPrices } from "../lib/add-ons-prices";
-import { separateByUppercase } from "../lib/separete-by-uppercase";
+import { separateByUppercase } from "../hooks/separate-by-uppercase";
 import { Button } from "./button";
 import { FormEvent } from "react";
 
