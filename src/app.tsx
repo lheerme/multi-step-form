@@ -7,6 +7,9 @@ import { AddOnsForm } from "./components/add-ons-form";
 import { FinishingUp } from "./components/finishing-up";
 import { ThankYouComponent } from "./components/thank-you-component";
 import { useShallow } from "zustand/react/shallow";
+import { useMediaQuery } from "./hooks/use-media-query";
+import { StepsMobile } from "./components/steps-mobile";
+import { twMerge } from "tailwind-merge";
 
 const stepsComponent: {[key: string]: ReactNode} = {
   1: <PersonalInfoForm />,
@@ -23,12 +26,23 @@ export function App() {
     })),
   )
 
+  const isDesktop = useMediaQuery('(min-width: 768px)')
+
   return (
-    <div className="w-full min-h-dvh flex items-center justify-center">
+    <div className="w-full min-h-dvh flex md:items-center justify-center px-3">
       {/* CONTENT */}
-      <div className="rounded-xl w-full max-w-[60rem] min-h-[37.5rem] flex bg-white p-4 shadow-lg">
+      {!isDesktop && (
+        <StepsMobile />
+      )}
+      <div 
+        className={twMerge('rounded-xl w-full max-w-[30rem] md:max-w-[60rem] h-fit md:min-h-[37.5rem] flex flex-col md:flex-row bg-white mt-24 md:mt-0 p-4 shadow-lg z-[1] mb-24 md:mb-0',
+          isFormComplete && 'mb-0'
+        )}
+      >
         {/* STEPS */}
-        <Steps />
+        {isDesktop && (
+          <Steps />
+        )}
         {isFormComplete ? (
           <ThankYouComponent />
         ) : (

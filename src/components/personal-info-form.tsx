@@ -53,7 +53,7 @@ export function PersonalInfoForm() {
   return (
     <form 
       onSubmit={handleSubmit(handlePersonalInfoSubmit)}
-      className="w-full max-w-lg py-4 px-6 flex-1 flex flex-col gap-6 mx-auto"
+      className="w-full max-w-lg py-2 px-3 md:py-4 md:px-6 flex-1 flex flex-col gap-3 md:gap-6 mx-auto"
     >
       <FormHeader.Root>
         <FormHeader.Title>
@@ -74,7 +74,7 @@ export function PersonalInfoForm() {
           id="name"
           placeholder="e.g. Stephen King"
           className={twMerge(
-            'outline-none ring-1 ring-light-gray rounded-lg text-marine-blue px-4 py-3 text-lg font-medium focus:ring-purplish-blue transition-shadow shadow-sm',
+            'outline-none ring-1 ring-light-gray rounded-lg text-marine-blue px-4 py-2 md:text-lg font-medium focus:ring-purplish-blue transition-shadow shadow-sm',
             errors.name && 'ring-strawberry-red focus:ring-strawberry-red'
           )}
           {...register('name')}
@@ -91,7 +91,7 @@ export function PersonalInfoForm() {
           id="email"
           placeholder="e.g. stephenking@lorem.com"
           className={twMerge(
-            'outline-none ring-1 ring-light-gray rounded-lg text-marine-blue px-4 py-3 text-lg font-medium focus:ring-purplish-blue transition-shadow shadow-sm',
+            'outline-none ring-1 ring-light-gray rounded-lg text-marine-blue px-4 py-2 md:text-lg font-medium focus:ring-purplish-blue transition-shadow shadow-sm',
             errors.email && 'ring-strawberry-red focus:ring-strawberry-red'
           )}
           {...register('email')}
@@ -109,7 +109,7 @@ export function PersonalInfoForm() {
           inputMode="numeric"
           pattern="[0-9+\-\(\)\s]*"
           className={twMerge(
-            'outline-none ring-1 ring-light-gray rounded-lg text-marine-blue px-4 py-3 text-lg font-medium focus:ring-purplish-blue transition-shadow shadow-sm',
+            'outline-none ring-1 ring-light-gray rounded-lg text-marine-blue px-4 py-2 md:text-lg font-medium focus:ring-purplish-blue transition-shadow shadow-sm',
             errors.phone && 'ring-strawberry-red focus:ring-strawberry-red'
           )}
           {...register('phone')}
@@ -125,9 +125,15 @@ export function PersonalInfoForm() {
         />
       </div>
 
-      <Button type="submit" className="mt-auto ml-auto">
+      <Button type="submit" className="mt-auto ml-auto hidden md:block">
         Next Step
       </Button>
+
+      <div className="bg-white flex fixed p-3 w-full left-0 bottom-0">
+        <Button type="submit" className="mt-auto ml-auto">
+          Next Step
+        </Button>
+      </div>
 
     </form>
   )

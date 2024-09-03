@@ -73,7 +73,7 @@ export function SelectYourPlanForm() {
 
   return (
     <form
-      className="w-full max-w-lg py-4 px-6 flex-1 flex flex-col gap-6 mx-auto"
+      className="w-full max-w-lg py-2 px-3 md:py-4 md:px-6 flex-1 flex flex-col gap-3 md:gap-6 mx-auto"
       onSubmit={handleSubmit(handleFormSubmit)}
     >
       <FormHeader.Root>
@@ -93,17 +93,17 @@ export function SelectYourPlanForm() {
             <RadioGroup.Root 
               onValueChange={field.onChange} 
               value={field.value} 
-              className="flex gap-2 justify-between"
+              className="flex flex-col md:flex-row gap-2 justify-between"
             >
               <RadioGroup.Item 
                 value="arcade" 
                 className={twMerge(
-                  'w-[8.5rem] rounded-md ring-1 ring-light-gray hover:ring-purplish-blue transition-all relative shadow-sm',
-                  isYearly ? 'h-[11.25rem]' : 'h-40'
+                  'w-full md:w-[8.5rem] rounded-md ring-1 ring-light-gray hover:ring-purplish-blue transition-all relative shadow-sm',
+                  isYearly ? ' h-24 md:h-[11.25rem]' : 'h-20 md:h-40'
                 )}
               >
                 <RadioGroup.Indicator className="size-full block rounded-md ring-1 ring-purplish-blue bg-pastel-blue/10 animate-fade-in" />
-                <div className="size-full flex flex-col items-start justify-between absolute left-0 top-0 rounded-md p-4">
+                <div className="size-full flex md:flex-col items-center md:items-start gap-3 md:gap-0 md:justify-between absolute left-0 top-0 rounded-md p-4">
                   <img src={iconArcade} alt="arcade icon" />
                   <div className="flex flex-col items-start">
                     <p className="text-marine-blue font-semibold tracking-wide">Arcade</p>
@@ -125,12 +125,12 @@ export function SelectYourPlanForm() {
               <RadioGroup.Item 
                 value="advanced" 
                 className={twMerge(
-                  'w-[8.5rem] rounded-md ring-1 ring-light-gray hover:ring-purplish-blue transition-all relative shadow-sm',
-                  isYearly ? 'h-[11rem]' : 'h-40'
+                  'w-full md:w-[8.5rem] rounded-md ring-1 ring-light-gray hover:ring-purplish-blue transition-all relative shadow-sm',
+                  isYearly ? ' h-24 md:h-[11.25rem]' : 'h-20 md:h-40'
                 )}
               >
                 <RadioGroup.Indicator className="size-full block rounded-md ring-1 ring-purplish-blue bg-pastel-blue/10 animate-fade-in" />
-                <div className="size-full flex flex-col items-start justify-between absolute left-0 top-0 rounded-md p-4">
+                <div className="size-full flex md:flex-col items-center md:items-start gap-3 md:gap-0 md:justify-between absolute left-0 top-0 rounded-md p-4">
                   <img src={iconAdvanced} alt="arcade icon" />
                   <div className="flex flex-col items-start">
                     <p className="text-marine-blue font-semibold tracking-wide">Advanced</p>
@@ -152,12 +152,12 @@ export function SelectYourPlanForm() {
               <RadioGroup.Item 
                 value="pro" 
                 className={twMerge(
-                  'w-[8.5rem] rounded-md ring-1 ring-light-gray hover:ring-purplish-blue transition-all relative shadow-sm',
-                  isYearly ? 'h-[11.25rem]' : 'h-40'
+                  'w-full md:w-[8.5rem] rounded-md ring-1 ring-light-gray hover:ring-purplish-blue transition-all relative shadow-sm',
+                  isYearly ? ' h-24 md:h-[11.25rem]' : 'h-20 md:h-40'
                 )}
               >
                 <RadioGroup.Indicator className="size-full block rounded-md ring-1 ring-purplish-blue bg-pastel-blue/10 animate-fade-in" />
-                <div className="size-full flex flex-col items-start justify-between absolute left-0 top-0 rounded-md p-4">
+                <div className="size-full flex md:flex-col items-center md:items-start gap-3 md:gap-0 md:justify-between absolute left-0 top-0 rounded-md p-4">
                   <img src={iconPro} alt="arcade icon" />
                   <div className="flex flex-col items-start">
                     <p className="text-marine-blue font-semibold tracking-wide">Pro</p>
@@ -215,8 +215,8 @@ export function SelectYourPlanForm() {
           )
         }}
       />
-      
-      <div className="mt-auto w-full flex items-center justify-between">
+
+      <div className="mt-auto w-full flex items-center justify-between fixed p-3 md:p-0 bottom-0 left-0 md:bg-auto bg-white">
         
         <Button onClick={handleGoBackClick} variant="secondary">
           Go Back

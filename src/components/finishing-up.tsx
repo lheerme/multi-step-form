@@ -38,7 +38,7 @@ export function FinishingUp() {
 
   return (
     <form
-      className="w-full max-w-lg py-4 px-6 flex-1 flex flex-col gap-6 mx-auto"
+      className="w-full max-w-lg py-2 px-3 md:py-4 md:px-6 flex-1 flex flex-col gap-3 md:gap-6 mx-auto"
       onSubmit={handleFormSubmit}
     >
       <FormHeader.Root>
@@ -51,7 +51,7 @@ export function FinishingUp() {
       </FormHeader.Root>
 
       <div className="w-full rounded-md bg-alabaster p-5 space-y-4">
-        <div className="flex items-center justify-between border-b border-light-gray pb-5">
+        <div className="flex items-center justify-between border-b border-light-gray pb-2 md:pb-5">
           <div className="flex flex-col">
             <p className="font-semibold text-marine-blue capitalize">
               {plan.type}
@@ -85,7 +85,7 @@ export function FinishingUp() {
         <span className="text-purplish-blue text-xl font-bold">{!plan.isYearly && '+'}${total}/{plan.isYearly ? 'yr' : 'mo'}</span>
       </div>
 
-      <div className="mt-auto w-full flex items-center justify-between">
+      <div className="mt-auto w-full flex items-center justify-between fixed p-3 md:p-0 bottom-0 left-0 md:bg-auto bg-white">
         
         <Button 
           onClick={handleGoBackClick} 
