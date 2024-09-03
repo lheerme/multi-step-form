@@ -216,7 +216,7 @@ export function SelectYourPlanForm() {
         }}
       />
 
-      <div className="mt-auto w-full flex items-center justify-between fixed p-3 md:p-0 bottom-0 left-0 md:bg-auto bg-white">
+      <div className="mt-auto w-full flex items-center justify-between fixed md:static p-3 md:p-0 bottom-0 left-0 md:bg-auto bg-white">
         
         <Button onClick={handleGoBackClick} variant="secondary">
           Go Back

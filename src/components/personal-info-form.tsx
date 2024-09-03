@@ -125,12 +125,8 @@ export function PersonalInfoForm() {
         />
       </div>
 
-      <Button type="submit" className="mt-auto ml-auto hidden md:block">
-        Next Step
-      </Button>
-
-      <div className="bg-white flex fixed p-3 w-full left-0 bottom-0">
-        <Button type="submit" className="mt-auto ml-auto">
+      <div className="bg-white flex fixed md:static p-3 md:p-0 w-full left-0 bottom-0 mt-0 md:mt-auto">
+        <Button type="submit" className="ml-auto">
           Next Step
         </Button>
       </div>
